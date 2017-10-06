@@ -1,0 +1,104 @@
+$base-color: #ff00f5;
+$base-size: 300px;
+
+$text-color: #ffffff;
+$text-color-hover: #fffc00;
+$text-stil: Helvetica;
+$text-size: 12px;
+$text-form: uppercase;
+
+$deko-color: #2400ff;
+
+%mitte{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+%schrift{
+  font-family: $text-stil;
+  color: $text-color;
+  font-size: $text-size;
+  text-transform: $text-form;
+  text-decoration: none;
+  letter-spacing: 1px;
+  &:hover{
+    color: $text-color-hover;
+    text-decoration: overline;
+    text-decoration-color: $deko-color;
+  }
+}
+
+%color-card{
+  @extend %mitte;
+  @extend %schrift;
+  box-shadow: 0px 0px 150px 10px, 0px 0px 50px 10px #90ff00, 0px 0px 50px 10px #ff0000;
+  background: $base-color;
+  width: $base-size;
+  height: $base-size;
+  &:hover{
+    box-shadow: 0px 0px 150px 10px, 0px 0px 50px 10px #3300ff, 0px 0px 50px 10px #52ff00;
+  }
+}
+
+@mixin scale($w,$h:$w){
+  width: $base-size*$w;
+  height: $base-size*$h;
+}
+
+body{
+  @extend %mitte;
+  background-image: url("https://cdn.theatlantic.com/assets/media/img/mt/2015/06/rbow-1/lead_960.jpg?1435518405");
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  }
+
+.base{
+  @extend %color-card;
+  z-index: 10;
+  &:after{
+    content: "-Unicorn-HEX ("+$base-color+")";
+  }
+}
+
+.dark{
+  @extend %color-card;
+  @include scale(1,0.75);
+  background: darken($base-color, 10%);
+  z-index: 3;
+  &:after{
+    content: "-Unicorn-HEX ("+darken($base-color, 10%)+")";
+  }
+}
+
+.darker{
+  @extend %color-card;
+  @include scale(1,0.5);
+  background: darken($base-color, 20%);
+  z-index: 2;
+  &:after{
+    content: "-Unicorn-HEX ("+darken($base-color, 20%)+")";
+  }
+}
+
+.light{
+  @extend %color-card;
+  @include scale(1,0.75);
+  background: lighten($base-color, 10%);
+  z-index: 3;
+  &:after{
+    content: "-Unicorn-HEX ("+lighten($base-color, 10%)+")";
+  }
+}
+
+.lighter{
+  @extend %color-card;
+  @include scale(1,0.5);
+  background: lighten($base-color, 20%);
+  z-index: 2;
+  &:after{
+    content: "-Unicorn-HEX ("+lighten($base-color, 20%)+")";
+  }
+}
